@@ -1,0 +1,22 @@
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+
+servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service=servico)
+
+navegador.get("https://www.youtube.com/")
+time.sleep(3) 
+
+pesquisa = navegador.find_element(By.XPATH, '//*[@id="center"]/yt-searchbox/div[1]/form/input')
+pesquisa.send_keys("nome do vídeo")
+
+botao_pesquisar = navegador.find_element(By.XPATH, '//*[@id="center"]/yt-searchbox/button')
+botao_pesquisar.click()
+time.sleep(3) 
+
+primeiro_video = navegador.find_element(By.XPATH, '//*[@id="metadata-line"]/span[1]')
+primeiro_video.click()
